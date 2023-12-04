@@ -1,11 +1,13 @@
 from sklearn.gaussian_process import GaussianProcessClassifier
 from sklearn.gaussian_process.kernels import RBF
-import sklearn.metrics as metrics
 
 class GaussianProcess:
 
-    def __init__(self, random_state):
-        self.kernel = RBF(1.0)
+    def __init__(self, random_state, kernel):
+        if kernel is None:
+            self.kernel = RBF(1.0)
+        else:
+            self.kernel = kernel
         self.model = GaussianProcessClassifier(kernel=self.kernel, random_state=random_state)
 
     def fit(self, X, y):
