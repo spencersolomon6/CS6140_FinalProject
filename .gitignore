@@ -1,1 +1,4 @@
 data
+models
+training_data
+hyperparam_search
