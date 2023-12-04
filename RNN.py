@@ -54,7 +54,7 @@ class RNN:
         plt.xlabel('Epochs')
         plt.ylabel('Loss')
         plt.title('Recurrent Neural Network Training Loss')
-        plt.savefig('plots/rnn.png')
+        plt.savefig('img/rnn.png')
 
     def score(self, X):
         return self.model.predict(X)

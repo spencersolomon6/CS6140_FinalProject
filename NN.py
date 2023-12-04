@@ -63,7 +63,7 @@ class NeuralNetwork:
         plt.xlabel('Epochs')
         plt.ylabel('Loss')
         plt.title('Deep Neural Network Training Loss')
-        plt.savefig('plots/nn.png')
+        plt.savefig('img/nn.png')
 
     def score(self, X):
         return self.model.predict(X)
