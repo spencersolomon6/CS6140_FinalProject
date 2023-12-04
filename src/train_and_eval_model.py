@@ -192,7 +192,7 @@ def train_eval_logistic_regression(train_X, train_y, test_X, test_y):
     lr.fit(train_X, train_y)
     scores = evaluate_model(test_X, test_y, lr)
 
-    dump(lr, 'models/lr.joblib')
+    dump(lr, '../models/lr.joblib')
 
     return scores
 
@@ -211,7 +211,7 @@ def train_eval_gaussian_process(train_X, train_y, test_X, test_y, kernel=None):
     gp.fit(train_X, train_y)
     scores = evaluate_model(test_X, test_y, gp)
 
-    dump(gp, 'models/gp.joblib')
+    dump(gp, '../models/gp.joblib')
 
     return scores
 
@@ -230,7 +230,7 @@ def train_eval_recurrent_neural_network(train_X, train_y, test_X, test_y):
     rnn.fit(train_X, train_y, epochs=50)
     scores = evaluate_model(test_X, test_y, rnn)
 
-    dump(rnn, 'models/rnn.joblib')
+    dump(rnn, '../models/rnn.joblib')
 
     return scores
 
@@ -249,7 +249,7 @@ def train_eval_neural_network(train_X, train_y, test_X, test_y):
     nn.fit(train_X, train_y, epochs=50)
     scores = evaluate_model(test_X, test_y, nn)
 
-    dump(nn, 'models/nn.joblib')
+    dump(nn, '../models/nn.joblib')
 
     return scores
 
@@ -353,19 +353,19 @@ def main():
         retrain = False
 
     # Read in and clean/process the training data
-    train = pd.read_csv('data/balanced_data.csv')
+    train = pd.read_csv('../data/balanced_data.csv')
     train_X, train_y, test_X, test_y = clean_preprocess(train, test_split=.2, nsamples=None, resample=False)
 
     # For each model type: If the model file exists, load and evaluate it. Otherwise, train and evaluate a new model on
     # the data
     if model_type == 'lr':
-        if not retrain and os.path.exists('models/lr.joblib'):
+        if not retrain and os.path.exists('../models/lr.joblib'):
             load_eval_model('lr', test_X, test_y)
         else:
             scores = train_eval_logistic_regression(train_X, train_y, test_X, test_y)
             print_scores(scores, 'Logistic Regression')
     elif model_type == 'gp':
-        if not retrain and os.path.exists('models/gp.joblib'):
+        if not retrain and os.path.exists('../models/gp.joblib'):
             load_eval_model('gp', test_X, test_y)
         else:
             train_X, train_y, test_X, test_y = clean_preprocess(train, test_split=.2, nsamples=1000, resample=False)
@@ -376,13 +376,13 @@ def main():
                 print(f'Gaussian Process trained on {kernel_name} kernel')
                 print_scores(scores, 'Gaussian Process')
     elif model_type == 'rnn':
-        if not retrain and os.path.exists('models/rnn.joblib'):
+        if not retrain and os.path.exists('../models/rnn.joblib'):
             load_eval_model('rnn', test_X, test_y)
         else:
             scores = train_eval_recurrent_neural_network(train_X, train_y, test_X, test_y)
             print_scores(scores, 'Recurrent Neural Network')
     elif model_type == 'nn':
-        if not retrain and os.path.exists('models/nn.joblib'):
+        if not retrain and os.path.exists('../models/nn.joblib'):
             model = load_eval_model('nn', test_X, test_y)
             errors = find_interesting_errors(model, test_X, test_y, should_print=False)
         else:
@@ -394,9 +394,9 @@ def main():
               f'* lr - Logistic Regression\n'
               f'* gp - Gaussian Process\n'
               f'* rnn - Recurrent Neural Network\n\n'
-              f'EX: python project.py lr\n\n'
+              f'EX: python src/train_and_eval_model.py lr\n\n'
               f'If you would like to retrain the models instead of using the pretrained files, set the second arg to 1.\n\n'
-              f'EX: python train_and_eval_model.py nn 1')
+              f'EX: python src/train_and_eval_model.py nn 1')
 
 
 if __name__ == '__main__':

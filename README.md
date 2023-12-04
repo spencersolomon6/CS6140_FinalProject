@@ -5,6 +5,8 @@
 First, unzip the pretrained models until a folder `./models`, so that the models can 
 be evaluated without requiring the user to wait for the long training process to complete.
 
+If you wish to train the model, unzip the data into a folder `./data`.
+
 train_and_eval_model.py is the main file of the program and accepts two parameters:
 
 1. Model Name (Required)
@@ -20,10 +22,10 @@ train_and_eval_model.py is the main file of the program and accepts two paramete
 
 To train and evaluate the Gaussian Process model without retraining:
 ```commandline
-python train_eval_model.py gp
+python src/train_eval_model.py gp
 ```
 
 To train and evaluate the Deep Neural Network model with retraining:
 ```commandline
-python train_eval_model.py rnn 1
+python src/train_eval_model.py rnn 1
 ```
