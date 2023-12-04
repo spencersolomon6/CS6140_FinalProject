@@ -347,7 +347,7 @@ def main():
     else:
         model_type = 'help'
 
-    if len(sys.argv) > 2:
+    if len(sys.argv) > 2 and str(sys.argv[2]) == '1':
         retrain = True
     else:
         retrain = False
